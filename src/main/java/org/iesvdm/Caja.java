@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class Caja<T>{
-
+    // Hola
     private T t;
 
     public Caja(T t) {
