@@ -24,7 +24,7 @@ public class UtilCoContraVarianza {
         //    V
         // Directivo
 
-        //SOLO ITERABLE POR EL TIPO DEL EXTENDS (? extends Empleado) => Empleado
+        //FUNCIONA -> SOLO ITERABLE (READ) POR EL TIPO DEL EXTENDS (? extends Empleado) => Empleado
         for (Empleado empleado : empleados) {
             System.out.println(empleado);
         }
@@ -59,14 +59,14 @@ public class UtilCoContraVarianza {
 
 
         //FALLA a una referencia subclase no puedes asignarle una referencia superclase
-//        Empleado empleado = new Empleado();
-//        Encargado encargado = empleado;
+        Empleado empleadoFAIL = new Empleado();
+        Encargado encargadoFAIL = empleadoFAIL;
 
-        //FUNCIONA
-        Encargado encargado = new Encargado();
-        Empleado empleado = encargado;
+        //FUNCIONA a una referencia superclase puedes asignarle una referencia subclase
+        Encargado encargadoOK = new Encargado();
+        Empleado empleadoOK = encargadoOK;
 
-        //FUNCIONA
+        //FUNCIONA - SOLO AÑADIBLE (WRITE) POR EL TIPO DEL SUPER (? super Encargado) => Encargado
         encargados.add(new Encargado());
 
         //FALLA por capture of super
