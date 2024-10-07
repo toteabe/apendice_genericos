@@ -6,13 +6,9 @@ import org.iesvdm.empresa.Encargado;
 
 import java.util.List;
 
-public class Util {
+public class UtilCoContraVarianza {
 
-    public static <T> void llenaConT(List<? super T> listSuperT, T t) {
-        listSuperT.add(t);
-    }
-
-        //                       ArrayList<Encargado>() ----V
+    //                       ArrayList<Encargado>() ----V
     public static void producir(List<? extends Empleado> empleados) {
         // Por qué covarianza en genéricos es sólo READ-ONLY o PRODUCER
         // DADO UN ESQUEMA DE HERENCIA COMO EL SIGUIENTE

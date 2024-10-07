@@ -136,6 +136,41 @@ public class GenericosTest {
         }
 
         Assertions.assertTrue(true);
+
+
+        //CONTRAVARIANTE
+        //       |
+        //       V
+        List<? super Integer> listSupInteger = new ArrayList<Number>();
+        //Object es super de Number --------------------------^
+        //SE DICE QUE EL PARÁMETRO DEL TIPO ES CONTRAVARIANTE
+
+        //Puedo añadir Integer
+        listSupInteger.add(i);
+        //Object es super de Number
+        //error de compilación al añadir object
+        //Object obj = new Object();
+        //listSupNumber.add(obj);
+
+        listSupInteger.add(i);
+        //Object es super de Number
+        //error de compilación al añadir object
+        //Object obj = new Object();
+        //listSupNumber2.add(obj);
+
+        //Error de compilación
+        //for (Integer integer: listSupInteger
+        //     ) {
+        //          System.out.println(integer);
+        //}
+
+        //Sólo se puede iterar a Object
+        for (Object obj: listSupInteger
+        ) {
+            System.out.println(obj);
+        }
+
+        Assertions.assertTrue(true);
     }
 
     @Test
@@ -156,19 +191,16 @@ public class GenericosTest {
 
     @Test
     public void testConsumidor_superT() {
+        List<Number> listNumber = new ArrayList<>();
         Integer i = 1;
-        Caja<Number> cajaNumber = new Caja<>(i);
 
-        List<Short> listShort = new ArrayList<>();
-        Short s = 2;
-        listShort.add(s);
+        //                                      CONTRAVARIANTE
+        //                                          |
+        //                                          V
+        //public static <T> void llenaConT(List<? super T> listSuperT, T t) {
+        Util.llenaConT(listNumber, i);
 
-        //Firma de productor extends T
-        //    public void reemplazaPorPrimeroEnColeccion(Collection<? extends T> coleccion) {
-        cajaNumber.reemplazaPorPrimeroEnColeccion(listShort);
-
-        Assertions.assertEquals(s, cajaNumber.getT());
-
+        Assertions.assertEquals(i, listNumber.iterator().next());
 
 
     }
@@ -191,21 +223,6 @@ public class GenericosTest {
         Integer iNumber = cajaInteger.getT();
 
         Assertions.assertTrue(cajaInteger.getT() instanceof Integer);
-
-    }
-
-    @Test
-    public void llenaListSuperTTest() {
-        List<Number> listNumber = new ArrayList<>();
-        Integer i = 1;
-
-        //                                      CONTRAVARIANTE
-        //                                          |
-        //                                          V
-        //public static <T> void llenaConT(List<? super T> listSuperT, T t) {
-        Util.llenaConT(listNumber, i);
-
-        Assertions.assertEquals(i, listNumber.iterator().next());
 
     }
 
